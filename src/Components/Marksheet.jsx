@@ -21,6 +21,13 @@ export default function Marksheet() {
   // != not operator
   
   const submitf=()=>{
+   if(!firstname.trim().length>0 ){
+     return alert("PLease fill First Name")   //break kaam karega ye return aur aake ka function nhi chalega.
+    }else if(!lastname.trim().length>0){
+      return alert("PLease Last Name")
+    }
+
+
     var percentage = (parseInt(englishmarks)+parseInt(mathhmarks)+parseInt(sciencehmarks)+parseInt(ssciencehmarks)+parseInt(hindihmarks))/5
 
     if(percentage>=90 && percentage<=100)
@@ -48,9 +55,9 @@ export default function Marksheet() {
     <div style={{ width: "100%", height: "100vh", backgroundColor: "#a1a7b3", margin: "0px important", display: 'flex', justifyContent: "center", alignItems: "center" }}>
     <div style={{ width: "60%", height: "70%", backgroundColor: "#e4e9f2", borderRadius: "10px" }}>
       <div style={{ margin: "7px", display: "flex", justifyContent: "space-evenly" }}>
-        <input type="text" placeholder="Enter Ur First Name" style={{ width: "250px" }} onChange={(e)=>setFirstname(e.target.value)}/>
+        <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onChange={(e)=>setFirstname(e.target.value)}/>
         <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onChange={(e)=>setLastName(e.target.value)}/>
-        <input type="text" placeholder="Enter Ur Mobile No." style={{ width: "250px" }} onChange={(e)=>setMobileNo(e.target.value)}/>
+        <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onChange={(e)=>setMobileNo(e.target.value)}/>
       </div>
       <div style={{ marginLeft: "38px", marginTop: "20px",marginRight:"38px" ,display:'flex',justifyContent:"space-between"}}>
         <div>
@@ -63,11 +70,11 @@ export default function Marksheet() {
           <option>Percentage</option>
           <option>Grade</option>
         </select>
-        <input type="text" placeholder="Enter English Marks" style={{ width: "250px" }} onChange={(e)=>setEnglishMarks(e.target.value)}/>
+        <input type="text" placeholder="Enter English Marks" style={{ width: "250px" }} maxLength={2} onChange={(e)=>setEnglishMarks(e.target.value)}/>
 
       </div>
-      <input type="number" placeholder="Enter Math Marks" style={{ width: "250px" }} onChange={(e)=>setMathMarks(e.target.value)}/>
-      <input type="number" placeholder="Enter Science Marks" style={{ width: "250px" ,margin:"10px"}} onChange={(e)=>setScienceMarks(e.target.value)}/>
+      <input type="number" placeholder="Enter Math Marks" style={{ width: "250px" }} max={2} onChange={(e)=>setMathMarks(e.target.value)}/>
+      <input type="number" placeholder="Enter Science Marks" maxLength={2} style={{ width: "250px" ,margin:"10px"}} onChange={(e)=>setScienceMarks(e.target.value)}/>
       <input type="number" placeholder="Enter Socal Science Marks" style={{ width: "250px" }} onChange={(e)=>setSscienceMarks(e.target.value)}/>
       <input type="number" placeholder="Enter Hindi Marks" style={{ width: "250px" }} onChange={(e)=>setHindiMarks(e.target.value)}/>
       <div style={{marginTop:"50px",paddingLeft:"100px"}}>
@@ -93,6 +100,8 @@ export default function Marksheet() {
      :
      <div style={{marginTop:"50px"}}>Percentage:{(parseInt(englishmarks)+parseInt(mathhmarks)+parseInt(sciencehmarks)+parseInt(ssciencehmarks)+parseInt(hindihmarks))/5}</div>
 }
+
+  <div style={{marginTop:"50px"}}><input type="button" value="Marksheet Form" onClick={()=>setStatus(false)}/></div>
   </div>
     }
      
