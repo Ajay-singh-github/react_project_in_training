@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 export default function Marksheet() {
   const [firstname, setFirstname] = useState('')
@@ -15,16 +16,19 @@ export default function Marksheet() {
   // const [female,setFemale] =useState('')
   const [gender,setGender] = useState('')
   const [status,setStatus] =useState(false)
-
+  const [error,setError] = useState({status:'',message:""})
   //&& and 
   // || or
   // != not operator
   
   const submitf=()=>{
    if(!firstname.trim().length>0 ){
-     return alert("PLease fill First Name")   //break kaam karega ye return aur aake ka function nhi chalega.
+     return setError({status:"firstname",message:"PLease fill First Name"})   //break kaam karega ye return aur aake ka function nhi chalega.
     }else if(!lastname.trim().length>0){
-      return alert("PLease Last Name")
+      return  setError({status:"lastname",message:"PLease Fill Last Name"})
+    }else if(!mobileno.trim().length>0 )
+    {
+      return setError({status:"mobileno",message:"PLease Fill Mobile No."}) 
     }
 
 
@@ -46,8 +50,22 @@ export default function Marksheet() {
         }else{
           setGradeSystem("sorry You are fail.")
         }
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes !"
+        }).then((result) => {
+          if(result.isConfirmed)
+          {
 
-    setStatus(true)    
+            setStatus(true)
+          }
+        });
+        
   }
   
   return (
@@ -55,14 +73,22 @@ export default function Marksheet() {
     <div style={{ width: "100%", height: "100vh", backgroundColor: "#a1a7b3", margin: "0px important", display: 'flex', justifyContent: "center", alignItems: "center" }}>
     <div style={{ width: "60%", height: "70%", backgroundColor: "#e4e9f2", borderRadius: "10px" }}>
       <div style={{ margin: "7px", display: "flex", justifyContent: "space-evenly" }}>
-        <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onChange={(e)=>setFirstname(e.target.value)}/>
+       <span style={{color:"red"}}>*</span> 
+       
+       <div >
+         <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onFocus={()=>setError({status:"",message:""})}  onChange={(e)=>setFirstname(e.target.value)}/>
+         {error.status=="firstname"?<div style={{color:"red"}}>{error.message}</div>:""}
+      </div>
+         
         <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onChange={(e)=>setLastName(e.target.value)}/>
         <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onChange={(e)=>setMobileNo(e.target.value)}/>
+     
       </div>
+      
       <div style={{ marginLeft: "38px", marginTop: "20px",marginRight:"38px" ,display:'flex',justifyContent:"space-between"}}>
         <div>
         <div>Gender</div>
-        Male<input type="radio" name="gender" value="Male" onClick={(e)=>setGender(e.target.value)}/>Female<input name="gender" type="radio" value="Female" onClick={(e)=>setGender(e.target.value)}/>
+        Male<input  type="radio" name="gender" value="Male" onClick={(e)=>setGender(e.target.value)}/>Female<input name="gender" type="radio" value="Female" onClick={(e)=>setGender(e.target.value)}/>
         </div>
         
         <select onChange={(e)=>setSgp(e.target.value)}>
