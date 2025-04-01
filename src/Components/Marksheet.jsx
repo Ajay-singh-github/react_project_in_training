@@ -16,19 +16,17 @@ export default function Marksheet() {
   // const [female,setFemale] =useState('')
   const [gender,setGender] = useState('')
   const [status,setStatus] =useState(false)
-  const [error,setError] = useState({status:'',message:""})
-  //&& and 
-  // || or
-  // != not operator
+  const [error,setError] = useState([{status1:'',message1:""},{status2:'',message2:""},{status3:'',message3:""},{status3:'',message3:""}])
+  
   
   const submitf=()=>{
    if(!firstname.trim().length>0 ){
-     return setError({status:"firstname",message:"PLease fill First Name"})   //break kaam karega ye return aur aake ka function nhi chalega.
+     return setError({status1:"firstname",message1:"PLease fill First Name"})   //break kaam karega ye return aur aake ka function nhi chalega.
     }else if(!lastname.trim().length>0){
-      return  setError({status:"lastname",message:"PLease Fill Last Name"})
-    }else if(!mobileno.trim().length>0 )
+      return  setError({status2:"lastname",message2:"PLease Fill Last Name"})
+    }else if(!mobileno?.trim()?.length>0 )  // ?    optional chaining
     {
-      return setError({status:"mobileno",message:"PLease Fill Mobile No."}) 
+      return setError({status3:"mobileno",message3:"PLease Fill Mobile No."}) 
     }
 
 
@@ -68,6 +66,7 @@ export default function Marksheet() {
         
   }
   
+  
   return (
     <>{status==false?
     <div style={{ width: "100%", height: "100vh", backgroundColor: "#a1a7b3", margin: "0px important", display: 'flex', justifyContent: "center", alignItems: "center" }}>
@@ -76,13 +75,20 @@ export default function Marksheet() {
        <span style={{color:"red"}}>*</span> 
        
        <div >
-         <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onFocus={()=>setError({status:"",message:""})}  onChange={(e)=>setFirstname(e.target.value)}/>
-         {error.status=="firstname"?<div style={{color:"red"}}>{error.message}</div>:""}
+         <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onFocus={()=>setError({status1:"",message1:""})}  onChange={(e)=>setFirstname(e.target.value)}/>
+         {error.status1=="firstname"?<div style={{color:"red"}}>{error.message1}</div>:""}
       </div>
-         
-        <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onChange={(e)=>setLastName(e.target.value)}/>
-        <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onChange={(e)=>setMobileNo(e.target.value)}/>
-     
+
+      <div >
+        <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onFocus={()=>setError({status2:"",message2:""})} onChange={(e)=>setLastName(e.target.value)}/>
+        {error.status2=="lastname"?<div style={{color:"red"}}>{error.message2}</div>:""}
+      </div>
+        
+
+      <div >
+        <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onFocus={()=>setError({status3:"",message3:""})} onChange={(e)=>setMobileNo(e.target.value)}/>
+        {error.status3=="mobileno"?<div style={{color:"red"}}>{error.message3}</div>:""}
+        </div>
       </div>
       
       <div style={{ marginLeft: "38px", marginTop: "20px",marginRight:"38px" ,display:'flex',justifyContent:"space-between"}}>
