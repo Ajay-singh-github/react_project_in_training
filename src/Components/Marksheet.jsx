@@ -16,17 +16,31 @@ export default function Marksheet() {
   // const [female,setFemale] =useState('')
   const [gender,setGender] = useState('')
   const [status,setStatus] =useState(false)
-  const [error,setError] = useState([{status1:'',message1:""},{status2:'',message2:""},{status3:'',message3:""},{status3:'',message3:""}])
+  const [reserror,setResError] = useState({})  //already kuch data dala hai 
   
+  console.log("we want to check error object what material can be stored in that:",reserror)
+
+  const handleError = (error, input,message)=>{
+    setResError(prevState=>({...prevState,[input]:{'error':error,'message':message}}))  //spread operator
+     }
+
   
   const submitf=()=>{
-   if(!firstname.trim().length>0 ){
-     return setError({status1:"firstname",message1:"PLease fill First Name"})   //break kaam karega ye return aur aake ka function nhi chalega.
-    }else if(!lastname.trim().length>0){
-      return  setError({status2:"lastname",message2:"PLease Fill Last Name"})
-    }else if(!mobileno?.trim()?.length>0 )  // ?    optional chaining
+    var validation = true
+
+   if(firstname.trim().length==0 ){        //     <></>   0  true
+    handleError(true,'firstname','Pls Input First Name')
+    validation = false
+    }
+    
+    if(!lastname.trim().length>0){
+      handleError(true,'lastname','Pls Input last Name')
+      validation = false
+    }
+    if(!mobileno?.trim()?.length>0 )  // ?    optional chaining
     {
-      return setError({status3:"mobileno",message3:"PLease Fill Mobile No."}) 
+      handleError(true,'mobile','Pls Input mobile no')
+      validation = false
     }
 
 
@@ -48,21 +62,26 @@ export default function Marksheet() {
         }else{
           setGradeSystem("sorry You are fail.")
         }
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes !"
-        }).then((result) => {
-          if(result.isConfirmed)
-          {
 
-            setStatus(true)
-          }
-        });
+        if(validation)
+        {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes !"
+          }).then((result) => {
+            if(result.isConfirmed)
+            {
+  
+              setStatus(true)
+            }
+          });
+        }
+        
         
   }
   
@@ -75,19 +94,19 @@ export default function Marksheet() {
        <span style={{color:"red"}}>*</span> 
        
        <div >
-         <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onFocus={()=>setError({status1:"",message1:""})}  onChange={(e)=>setFirstname(e.target.value)}/>
-         {error.status1=="firstname"?<div style={{color:"red"}}>{error.message1}</div>:""}
+         <input type="text"  placeholder="Enter Ur First Name" style={{ width: "250px" }} onFocus={()=>handleError(false , "firstname","")}  onChange={(e)=>setFirstname(e.target.value)}/>
+         {reserror?.firstname?.error?<div style={{color:"red"}}>{reserror?.firstname?.message}</div>:""}
       </div>
 
       <div >
-        <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onFocus={()=>setError({status2:"",message2:""})} onChange={(e)=>setLastName(e.target.value)}/>
-        {error.status2=="lastname"?<div style={{color:"red"}}>{error.message2}</div>:""}
-      </div>
+        <input type="text" placeholder="Enter Ur Last Name" style={{ width: "250px" }} onFocus={()=>handleError(false , "lastname","")} onChange={(e)=>setLastName(e.target.value)}/>
+        {reserror?.lastname?.error?<div style={{color:"red"}}>{reserror?.lastname?.message}</div>:""}
+        </div>
         
 
       <div >
-        <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onFocus={()=>setError({status3:"",message3:""})} onChange={(e)=>setMobileNo(e.target.value)}/>
-        {error.status3=="mobileno"?<div style={{color:"red"}}>{error.message3}</div>:""}
+        <input type="text" placeholder="Enter Ur Mobile No." maxLength={10} style={{ width: "250px" }} onFocus={()=>handleError(false , "mobile","")} onChange={(e)=>setMobileNo(e.target.value)}/>
+        {reserror?.mobile?.error?<div style={{color:"red"}}>{reserror?.mobile?.message}</div>:""}
         </div>
       </div>
       
