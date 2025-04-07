@@ -14,7 +14,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/home'  element={<HomePage/>}/>
+          <Route path='/'  element={<HomePage/>}/>
           <Route path='/service'  element={<ServicePage/>}/>
           <Route path='/marksheet'  element={<Marksheet/>}/>
           <Route path='/exampleofloop'  element={<ExampleOfLoop/>}/>
