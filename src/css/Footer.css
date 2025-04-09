@@ -1,0 +1,120 @@
+.container{
+    /* border:2px solid black; */
+    background: linear-gradient(to bottom, rgb(167, 166, 166) -1000%, rgb(249, 252, 252) 90%);
+    height:550px;
+}
+.heading h2{
+    /* border:2px solid black; */
+    width:38%;
+    /* margin-top: 20px; */
+    margin-left: 200px;
+}
+.container img{
+    /* border:2px solid blue; */
+   margin-top: 10px;
+    width:140px;
+    height:60px;
+    margin-left: 53%;
+}
+.logo3 img{
+    /* border:2px solid red; */
+    display: flex;
+    width:140px;
+    margin-top: 5px;
+}
+.logo1 img{
+    /* border:2px solid red; */
+    margin-top: 5px;
+    width:140px;
+    height:70px;
+    margin-left: 950px;
+}
+.logo2 img{
+    margin-left: 200px;
+    width:80px;
+    height:80px;
+    border-radius: 10px;
+}
+.logo2 h1{
+    color:rgb(255, 132, 0);
+    margin-top: -50px;
+    /* border:2px solid red; */
+    margin-left: 300px;
+    width:55px;
+
+}
+
+.logo2 p{
+    /* border:2px solid red; */
+    margin-top: 15px;
+    margin-left: 160px;
+    width:150px;
+    font-weight: bolder;
+
+}
+.smallcontainer{
+    /* border:2px solid blue; */
+    margin-top: -90px;
+    display:flex;
+    width:45%;
+    height:350px;
+    margin-left: 500px;
+}
+.box{
+    /* border:2px solid brown; */
+    padding: 5px;
+}
+.box p{
+    margin-top: 10px;
+    gap:20px;
+    color:#5a5959;
+}
+.box1{
+    /* border:2px solid brown; */
+    margin-left: 25px;
+    padding: 5px;
+}
+.box1 p{
+    margin-top: 10px;
+    gap:20px;
+    color:#5a5959;
+
+}
+.boxs{
+    /* border:2px solid red; */
+    margin-top: 60px;
+}
+.boxs p{
+    gap:20px;
+    color:#5a5959;
+}
+.box2{
+    /* border:2px solid brown; */
+    margin-left: 25px;
+    padding: 5px;
+}
+.box2 p{
+    margin-top: 10px;
+    gap:20px;
+    color:#5a5959;
+}
+.box2 button{
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.box3{
+    /* border:2px solid brown; */
+    margin-left: 25px;
+    padding: 5px;
+}
+.box3 p{
+    margin-top: 10px;
+    gap:20px;
+    color:#5a5959;
+}
+.box3s{
+        /* border:2px solid red; */
+        margin-top: 60px;
+
+}
