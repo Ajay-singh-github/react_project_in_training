@@ -30,7 +30,7 @@ export default  function HomePage(){
       </div>
      </div>
 
-     <SwipeToSlide />
+     <div style={{marginBottom:"80px"}}><SwipeToSlide /></div>
      <Footer/>
      </div>
     )

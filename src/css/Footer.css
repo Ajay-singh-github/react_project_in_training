@@ -1,120 +1,126 @@
-.container{
-    /* border:2px solid black; */
-    background: linear-gradient(to bottom, rgb(167, 166, 166) -1000%, rgb(249, 252, 252) 90%);
-    height:550px;
+.footer-main-container{
+    height:650px;
+    background-color: rgb(234, 234, 236);
+    /* display: flex; */
 }
-.heading h2{
-    /* border:2px solid black; */
-    width:38%;
-    /* margin-top: 20px; */
-    margin-left: 200px;
+.footer1{
+    /* border: 2px solid black; */
+    height: 450px;
+    width:500px;
 }
-.container img{
-    /* border:2px solid blue; */
-   margin-top: 10px;
-    width:140px;
-    height:60px;
-    margin-left: 53%;
+.footer2{
+    /* border: 2px solid black; */
+    height: 450px;
+    width:200px;
 }
-.logo3 img{
-    /* border:2px solid red; */
-    display: flex;
-    width:140px;
-    margin-top: 5px;
+.footer2 p{
+    color: rgb(121, 117, 117);
+    margin-left: 50px;
+    margin-top: 20px;
 }
-.logo1 img{
-    /* border:2px solid red; */
-    margin-top: 5px;
-    width:140px;
-    height:70px;
-    margin-left: 950px;
+.footer2 h4{
+    margin-left: 50px;
+    margin-top: 20px; 
 }
-.logo2 img{
-    margin-left: 200px;
-    width:80px;
-    height:80px;
+.footer3{
+    /* border: 2px solid black; */
+    height: 450px;
+    width:200px;
+}
+.footer3 p{
+    color: rgb(121, 117, 117);
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.footer3 h4{
+    margin-left: 50px;
+    margin-top: 20px; 
+}
+.footer3-second{
+    margin-top: 90px;
+}
+.footer4{
+    /* border: 2px solid black; */
+    height: 450px;
+    width:200px;
+}
+.footer4 p{
+    color: rgb(121, 117, 117);
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.footer4 h4{
+    margin-left: 50px;
+    margin-top: 20px; 
+}
+.footer4 select{
+    height:30px;
+    width:130px;
     border-radius: 10px;
+    margin-left: 40px;
+    margin-top: 30px;
+    color:gray;
+    border: 1px solid gray;
 }
-.logo2 h1{
-    color:rgb(255, 132, 0);
-    margin-top: -50px;
-    /* border:2px solid red; */
-    margin-left: 300px;
-    width:55px;
-
+.footer5{
+    /* border: 2px solid black; */
+    height: 450px;
+    width:200px;
 }
-
-.logo2 p{
-    /* border:2px solid red; */
-    margin-top: 15px;
-    margin-left: 160px;
-    width:150px;
+.footer5 p{
+    color: rgb(121, 117, 117);
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.footer5 h4{
+    margin-left: 50px;
+    margin-top: 20px; 
+}
+.footer-main-1{
+    display: flex;
+}
+.footer-main-1 h3{
+    margin-top: 40px;
     font-weight: bolder;
-
-}
-.smallcontainer{
-    /* border:2px solid blue; */
-    margin-top: -90px;
-    display:flex;
-    width:45%;
-    height:350px;
-    margin-left: 500px;
-}
-.box{
-    /* border:2px solid brown; */
-    padding: 5px;
-}
-.box p{
-    margin-top: 10px;
+    color: gray;
+    font-size: 25px;
+    margin-left: 160px;
     gap:20px;
-    color:#5a5959;
 }
-.box1{
-    /* border:2px solid brown; */
-    margin-left: 25px;
-    padding: 5px;
+.footer-main-1 img{
+    height:60px;
+    width: 190px;
+    margin-top: 30px;
 }
-.box1 p{
-    margin-top: 10px;
-    gap:20px;
-    color:#5a5959;
-
-}
-.boxs{
-    /* border:2px solid red; */
+.footer-main-2{
+    display: flex;
     margin-top: 60px;
 }
-.boxs p{
-    gap:20px;
-    color:#5a5959;
+.footer1-small{
+    display: flex;
+    margin-left: 50px;
 }
-.box2{
-    /* border:2px solid brown; */
-    margin-left: 25px;
-    padding: 5px;
+.footer1-small p{
+    margin-top: 100px;
+    margin-left: 90px;
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgb(255, 82, 0);
+    width: 100px;
+    /* border: 2px solid black; */
 }
-.box2 p{
-    margin-top: 10px;
-    gap:20px;
-    color:#5a5959;
+.footer1-small div{
+    /* width: 100px; */
+    /* border: 2px solid black; */
+    width: 80px;
 }
-.box2 button{
+.footer1-small img{
+    margin-top: 90px;
+    margin-left: 100px;
+   
+}
+.footer1 h3{
+    margin-left: 150px;
     margin-top: 20px;
-    cursor: pointer;
-}
-
-.box3{
-    /* border:2px solid brown; */
-    margin-left: 25px;
-    padding: 5px;
-}
-.box3 p{
-    margin-top: 10px;
-    gap:20px;
-    color:#5a5959;
-}
-.box3s{
-        /* border:2px solid red; */
-        margin-top: 60px;
-
+    color: gray;
 }

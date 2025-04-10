@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
-// css
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/SwipeToSlider.css";
 
 import { useNavigate } from "react-router-dom";
-// >>>>>>> 7348e4f8bdf8cc09b530c6fdfa89e905b2b94500
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -35,14 +33,10 @@ function SamplePrevArrow(props) {
       className={className}
       style={{
         ...style,
-        
-
         background: "gray",
         color:"black",
-        // position: "absolute", 
         borderRadius: "50%",
         top: "-5%", 
-        // right: "40px",
         marginLeft:"1080px",
       }}
       onClick={onClick}
@@ -51,10 +45,7 @@ function SamplePrevArrow(props) {
 }
 
 function SwipeToSlide() {
-
   var navigate = useNavigate()
-
-
   const settings = {
     className: "center",
     infinite: true,
@@ -90,6 +81,63 @@ function SwipeToSlide() {
       
           },
   };
+  
+  
+  const [data,setData]  =useState([{img:"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/615950282510979d66ee2399b320770f",restaurant:"Haveli Restaurant",rating:"4.1 • 70-75 mins",description:"North Indian, South Indian, Chinese Grand Trunk Road"},
+    {img:"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/5fe4444a065b60c4fe39ef975222c12b",restaurant:"La Pino'z Pizza",rating:"4.1 • 70-75 mins",description:"Pizzas, Pastas, Italian, Desserts, Beverages Sasaram"},
+    {img:"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/6dbf749b863c540b56738db880a6c733",restaurant:"Maurya Roya",rating:"4.1 • 70-75 mins",description:"North Indian, Chinese, South"},
+    {img:"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/6dbf749b863c540b56738db880a6c733",restaurant:"Maurya Roya",rating:"4.1 • 70-75 mins",description:"North Indian, Chinese, South"},
+    {img:"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/5fe4444a065b60c4fe39ef975222c12b",restaurant:"La Pino'z Pizza",rating:"4.1 • 70-75 mins",description:"Pizzas, Pastas, Italian, Desserts, Beverages Sasaram"},
+
+  ])
+  
+   console.log(data)
+  return (
+    <div className="sliders2-container">
+      <Slider {...settings}>
+       {
+        data.map((item)=>(
+          <div className="sliders2-content" onClick={()=>navigate("/secondscreen")}>
+          <div>
+            <img  src={item.img} />
+          </div>
+          <div style={{marginTop:"10px"}}>
+            <h3>{item.restaurant}</h3>
+            <h4>{item.rating}</h4>
+            <p>{item.description}</p>
+          </div>
+        </div>
+        ))
+       }
+      </Slider>
+    </div>
+  );
+}
+
+export default SwipeToSlide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // setting
 
 
@@ -108,71 +156,3 @@ function SwipeToSlide() {
 //           <p>{item.title3}</p>
 //         </div>
 //       </div>))
-
-  return (
-    <div className="sliders2-container">
-      <Slider {...settings}>
-        <div className="sliders2-content" onClick={()=>navigate("/secondscreen")}>
-          <div>
-            <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/615950282510979d66ee2399b320770f" />
-          </div>
-          <div>
-            <h3>Haveli Restaurant</h3>
-            <h4>4.1 • 70-75 mins</h4>
-            <p>North Indian, South Indian, Chinese Grand Trunk Road</p>
-          </div>
-        </div>
-
-        <div className="sliders2-content">
-          <div>
-            <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/5fe4444a065b60c4fe39ef975222c12b" />
-          </div>
-          <div>
-            <h3>La Pino'z Pizza</h3>
-            <h4>4.1 • 70-75 mins</h4>
-            <p>Pizzas, Pastas, Italian, Desserts, Beverages Sasaram</p>
-          </div>
-        </div>
-
-        <div className="sliders2-content">
-          <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/6dbf749b863c540b56738db880a6c733" />
-          <h3>Maurya Roya</h3>
-          <h4>4.1 • 70-75 mins</h4>
-          <p>North Indian, Chinese, South<br /> India Rauza Roadh</p>
-        </div>
-
-        <div className="sliders2-content">
-          <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/5/29/fe4be499-c9a9-4685-aa56-996987165436_598730.JPG" />
-          <h3>Winni Cakes And More</h3>
-          <h4>4.1 • 70-75 mins</h4>
-          <p>Desserts, Sweets MAHAVIR ASTHAN</p>
-        </div>
-
-        <div className="sliders2-content">
-          <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/4407f82019825c080e47d36e991ab179" />
-          <h3>Momo magic cafe</h3>
-          <h4>4.1 • 70-75 mins</h4>
-          <p>Desserts, Sweets MAHAVIR ASTHAN</p>
-        </div>
-
-        <div className="sliders2-content">
-          <h3>6</h3>
-        </div>
-
-        <div className="sliders2-content">
-          <h3>7</h3>
-        </div>
-
-        <div className="sliders2-content">
-          <h3>8</h3>
-        </div>
-
-        <div className="sliders2-content">
-          <h3>9</h3>
-        </div>
-      </Slider>
-    </div>
-  );
-}
-
-export default SwipeToSlide;
