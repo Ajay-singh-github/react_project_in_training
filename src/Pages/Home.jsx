@@ -1,37 +1,79 @@
+import HeaderComponent from "../Components/HeaderComponet";
+import CarousalComponent from "../Components/carousal";
+import SwipeToSlide from "../Components/SwipeToSlideComponent";
+import Footer from "../Components/Footer";
 
-import HeaderComponent from "../Components/HeaderComponet"
-import CarousalComponent from "../Components/carousal"
-import BoxComponent from "../Components/BoxComponent"
-import FooterComponent from "../Components/Footer"
-import AddTwoNumberComponent from "../Components/AddTwoNumberComponent"
-import SwipeToSlide from "../Components/SwipeToSlideComponent"
-import Cardmenu from "../Components/TopRestaurant"
-import Footer from "../Components/Footer"
-export default  function HomePage(){
+export default function HomePage() {
+  return (
+    <div style={{ fontFamily: "sans-serif", width: "100%", boxSizing: "border-box" }}>
+      <HeaderComponent />
+      <CarousalComponent />
 
-    return(
-    <div>
-        <HeaderComponent/>
-      <CarousalComponent/>
-      <h1 style={{marginLeft:"7%"}}>Product</h1>
-      <SwipeToSlide/>
+      {/* Product Section */}
+      <h1
+        style={{
+          marginLeft: "7%",
+          fontSize: "1.8rem",
+          marginTop: "30px",
+          marginBottom: "20px",
+          color: "#333",
+        }}
+      >
+        Product
+      </h1>
 
-      <div style={{marginTop:"50px",paddingLeft:"7%",fontWeight:'bold',marginBottom:"50px"}}>
-      <div ><h2>Restaurants with online food delivery in Bihar</h2></div>
-      <div className="menuitem">
-        <div>Filter</div>
-        <div>Sort By</div>
-        <div>Fast Delivery</div>
-        <div>Ratings 4.0+</div>
-        <div>Pure Veg</div>
-        <div>Offers</div>
-        <div>Rs.300-Rs.600</div>
-        <div>Less than Rs. 300</div>
+      <SwipeToSlide />
+
+      {/* Restaurant Section */}
+      <div
+        style={{
+          marginTop: "50px",
+          paddingLeft: "7%",
+          fontWeight: "bold",
+          marginBottom: "30px",
+        }}
+      >
+        <h2 style={{ fontSize: "1.5rem", marginBottom: "20px" }}>
+          Restaurants with online food delivery in Bihar
+        </h2>
+
+        <div
+          className="menuitem"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "9px",
+            fontWeight: "normal",
+            fontSize: "15px",
+            color: "#555",
+          }}
+        >
+          <div style={pillStyle}>Filter</div>
+          <div style={pillStyle}>Sort By</div>
+          <div style={pillStyle}>Fast Delivery</div>
+          <div style={pillStyle}>Ratings 4.0+</div>
+          <div style={pillStyle}>Pure Veg</div>
+          <div style={pillStyle}>Offers</div>
+          <div style={pillStyle}>Rs.300-Rs.600</div>
+          <div style={pillStyle}>Less than Rs. 300</div>
+        </div>
       </div>
-     </div>
 
-     <div style={{marginBottom:"80px"}}><SwipeToSlide /></div>
-     <Footer/>
-     </div>
-    )
+      {/* Another Swipe */}
+      <div style={{ marginBottom: "80px" }}>
+        <SwipeToSlide />
+      </div>
+
+      <Footer />
+    </div>
+  );
 }
+
+const pillStyle = {
+  padding: "8px 16px",
+  backgroundColor: "#f5f5f5",
+  borderRadius: "20px",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+};
+
