@@ -1,0 +1,22 @@
+.main-container-product{
+    width: 200px;
+    height: 200px;
+    background-color: rgb(209, 218, 215);
+    border-radius: 5px;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 4px 0px #3f3534;
+    margin: auto;
+    cursor: pointer;
+    transition: scale 0.3s ease;
+}
+
+.parent-of-main-container-product{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.main-container-product:hover{
+    scale: 1.05;
+}

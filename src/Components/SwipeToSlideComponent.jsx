@@ -96,8 +96,8 @@ function SwipeToSlide() {
     <div className="sliders2-container">
       <Slider {...settings}>
        {
-        data.map((item)=>(
-          <div className="sliders2-content" onClick={()=>navigate("/secondscreen")}>
+        data.map((item,index)=>(
+          <div className="sliders2-content" key={index} onClick={()=>navigate("/secondscreen")}>
           <div>
             <img  src={item.img} />
           </div>
