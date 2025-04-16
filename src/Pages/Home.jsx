@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 export default function HomePage() {
   return (
     <div style={{ fontFamily: "sans-serif", width: "100%", boxSizing: "border-box" }}>
-      <HeaderComponent />
+      <HeaderComponent defaultSearch={true}/>
       <CarousalComponent />
 
       {/* Product Section */}

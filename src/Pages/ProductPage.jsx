@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 import { useLocation } from "react-router-dom";
-import Header from "../Components/HeaderComponet";
+import HeaderComponent from "../Components/HeaderComponet";
 import "../css/product.css";
 export default function ProductPage() {
     const location = useLocation()
@@ -16,6 +16,18 @@ export default function ProductPage() {
         { productId: 24, productname: "Cheddar cheese", imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/039/651/536/small/ai-generated-pizza-cut-out-pizza-on-transparent-background-cheese-pizza-cut-out-png.png", rating: 6, description: "Cheddar cheese description", price: 200, offerprice: 120, categoryId: 2 },
         { productId: 25, productname: "Noodles & Rice", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Noodles & Rice description", price: 300, categoryId: 3 },
         { productId: 26, productname: "Noodles & Rice", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Noodles & Rice description", price: 400, categoryId: 3 },
+        { productId: 27, productname: "Chicken Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Biriyani description", price: 300, categoryId: 4 },
+        { productId: 28, productname: "Hyderabadi Dum Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Hyderabadi Dum Biryani description", price: 400, categoryId: 4 },
+        { productId: 29, productname: "Veg Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Veg Biryani description", price: 300, categoryId: 4 },
+        { productId: 30, productname: "Paneer Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Paneer Biryani description", price: 400, categoryId: 4 },
+    
+        { productId: 31, productname: "Egg Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Egg Biryani description", price: 300, categoryId: 4 },
+        { productId: 32, productname: "Fish Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Fish Biryani description", price: 400, categoryId: 4 },
+        { productId: 33, productname: "Prawns Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Prawns Biryani description", price: 300, categoryId: 4 },
+        { productId: 34, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
+        { productId: 35, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
+        { productId: 35, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
+
     ])
 
     // const filter = allproducts.filter((item)=>item.categoryId==categoryId && item.offerprice>120 && item.productname.startsWith("M"))
@@ -25,7 +37,8 @@ export default function ProductPage() {
     console.log(filter)
     
     return (<div>
-        <Header />
+        <HeaderComponent />
+
         <div className="parent-of-main-container-product">
             {filter.map((item) => (
                 <div className="main-container-product">
