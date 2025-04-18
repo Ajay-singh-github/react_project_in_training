@@ -69,3 +69,19 @@
 .add-to-cart:active{
     scale: 0.95;
 }
+
+.Search-btn{
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.Search-btn input{
+    width: 25%;
+    height: 30px;
+    padding-left: 10px;
+    outline: none;
+}

@@ -8,6 +8,7 @@ export default function ProductPage() {
     const categoryId = location.state.categoryId    //2
     // console.log("what is in location:",location)
     // console.log("Category Id:",categoryId)
+    const [searchItems,setSearchItems] = useState([])
 
     const [allproducts, setAllProducts] = useState([
         { productId: 21, productname: "Chole", imageUrl: "https://png.pngtree.com/png-clipart/20230425/ourmid/pngtree-pozole-and-chole-phature-on-isloated-transparent-background-png-image_6730832.png", rating: 5, description: "chole descript", price: 400, offerprice: 300, categoryId: 1 },
@@ -26,7 +27,7 @@ export default function ProductPage() {
         { productId: 33, productname: "Prawns Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Prawns Biryani description", price: 300, categoryId: 4 },
         { productId: 34, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
         { productId: 35, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
-        { productId: 35, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
+        { productId: 36, productname: "Kolkata Biryani", imageUrl: "https://png.pngtree.com/png-vector/20240828/ourmid/pngtree-white-cooked-rice-isolated-png-image_13655088.png", rating: 6, description: "Kolkata Biryani description", price: 400, categoryId: 4 },
 
     ])
 
@@ -35,13 +36,27 @@ export default function ProductPage() {
     
     const filter = allproducts.filter((item)=>item.categoryId==categoryId)
     console.log(filter)
+
+    const searchfn = (element)=>{
+
+       setSearchItems(filter.filter((item)=>
+        item.productname.includes(element.target.value))
+    )
+        
+        console.log("search array",searchItems.length)
+    }
     
     return (<div>
-        <HeaderComponent />
+        <HeaderComponent/>
+
+        
+         <div className="Search-btn">
+             <input type="text" placeholder="Search..." onKeyDown={(element)=>searchfn(element)}/>
+         </div>
 
         <div className="parent-of-main-container-product">
-            {filter.map((item) => (
-                <div className="main-container-product">
+            {searchItems.length==0?filter:searchItems.map((item) => (
+                <div className="main-container-product" key={item.productId}>
                     <div className="img-div"><img src={item.imageUrl} /></div>
                     <hr></hr>
                     <h3 className="product-name">{item.productname}</h3>
@@ -51,7 +66,8 @@ export default function ProductPage() {
                         <div className="add-to-cart">Add To Cart</div>
                     </div>
                 </div>
-            ))}
+            ))
+        }
         </div>
     </div>)
 }
