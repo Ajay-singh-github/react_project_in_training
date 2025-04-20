@@ -8,7 +8,7 @@ export default function ProductPage() {
     const categoryId = location.state.categoryId    //2
     // console.log("what is in location:",location)
     // console.log("Category Id:",categoryId)
-    const [searchItems,setSearchItems] = useState([])
+    const [searchitem,setSearchItem]=useState()    
 
     const [allproducts, setAllProducts] = useState([
         { productId: 21, productname: "Chole", imageUrl: "https://png.pngtree.com/png-clipart/20230425/ourmid/pngtree-pozole-and-chole-phature-on-isloated-transparent-background-png-image_6730832.png", rating: 5, description: "chole descript", price: 400, offerprice: 300, categoryId: 1 },
@@ -35,15 +35,10 @@ export default function ProductPage() {
     // console.log(filter)
     
     const filter = allproducts.filter((item)=>item.categoryId==categoryId)
-    console.log(filter)
-
-    const searchfn = (element)=>{
-
-       setSearchItems(filter.filter((item)=>
-        item.productname.includes(element.target.value))
-    )
-        
-        console.log("search array",searchItems.length)
+    
+    const searchfn=(element)=>{
+    const d = filter.filter((item)=>item.productname.toLowerCase().includes(element.target.value.toLowerCase()))    // india     in    indigo
+    setSearchItem(d)
     }
     
     return (<div>
@@ -51,11 +46,23 @@ export default function ProductPage() {
 
         
          <div className="Search-btn">
-             <input type="text" placeholder="Search..." onKeyDown={(element)=>searchfn(element)}/>
+             <input type="text" placeholder="Search..." onChange={(element)=>searchfn(element)}/>
          </div>
 
         <div className="parent-of-main-container-product">
-            {searchItems.length==0?filter:searchItems.map((item) => (
+            {searchitem?.length>0?searchitem.map((item) => (
+                <div className="main-container-product" key={item.productId}>
+                    <div className="img-div"><img src={item.imageUrl} /></div>
+                    <hr></hr>
+                    <h3 className="product-name">{item.productname}</h3>
+                    <p className="product-description">{item.description}</p>
+                    <div className="main-div-of-add-to-cart">
+                        {item.offerprice ? <div className="product-price">&#8377;<s>{item.price}</s> {item.offerprice}</div> : <div className="product-price">&#8377;{item.price}</div>}
+                        <div className="add-to-cart">Add To Cart</div>
+                    </div>
+                </div>
+            )):
+            filter.map((item) => (
                 <div className="main-container-product" key={item.productId}>
                     <div className="img-div"><img src={item.imageUrl} /></div>
                     <hr></hr>
