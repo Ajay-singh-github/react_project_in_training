@@ -49,11 +49,14 @@ ul li a:hover{
 .icon:hover{
     color:rgb(255, 100, 27);
 }
+.threeline{
+  display: none;
+}
 
 /* responsive */
 @media (max-width: 768px) {
     .nav {
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
       padding: 10px;
       height: auto;
@@ -79,12 +82,30 @@ ul li a:hover{
     ul li a {
       font-size: 16px;
     }
+
+    .list{
+      display: none;
+    }
+    .nav{
+      display: flex ;
+      justify-content: space-between;
+
+    }
+    .logo-img{
+      /* background-color: green; */
+    }
+    .threeline{
+      margin-right: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      display: block;
+    }   
 }
 
 @media (max-width: 480px) {
     .nav {
       padding: 10px;
-    }
+        }
   
     ul li a {
       font-size: 14px;
