@@ -8,6 +8,11 @@ import { CiShoppingCart } from "react-icons/ci";
 import { FaChevronDown } from "react-icons/fa6";
 import { FaTv } from "react-icons/fa6";
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeFilledIcon from '@mui/icons-material/HomeFilled';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -37,8 +42,28 @@ export default function HeaderComponent(props) {
     {
       navigate("/")
     }
+    if(text=="Cart")
+    {
+      navigate("/cart")
+    }
   }
 
+
+  const getIcon=(text)=>{
+   switch(text)
+   {
+      case 'Home':
+        return <HomeFilledIcon/>
+      case "Offers":
+        return <LocalOfferIcon/>
+      case 'Profile':
+        return <AccountBoxIcon/>
+      case 'Cart':
+        return <AddShoppingCartIcon/>  
+      case 'Logout':
+        return <LogoutIcon/>
+   }
+  }
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -47,7 +72,7 @@ export default function HeaderComponent(props) {
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>handleClick(text)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+               {getIcon(text)}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -58,7 +83,7 @@ export default function HeaderComponent(props) {
   );
 
   return <div className='nav'>
-    <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png"></img></div>
+    <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png" onClick={()=>navigate("/")} style={{cursor:"pointer"}}></img></div>
     <div className="threeline" onClick={toggleDrawer(true)}><MenuIcon /></div>
 
     <div className='list'>
@@ -108,7 +133,7 @@ export default function HeaderComponent(props) {
         <li>
           <div className='icon'>
             <div><CiShoppingCart /></div>&nbsp;
-            <div><a href="#">Cart</a></div>
+            <div onClick={()=>navigate("/cart")}>Cart</div>
           </div>
         </li>
 

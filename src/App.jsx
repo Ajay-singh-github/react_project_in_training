@@ -5,7 +5,9 @@ import ServicePage from './Pages/Service';
 import Marksheet from './Components/Marksheet';
 import ExampleOfLoop from './Components/ExampleOfLoopComponent';
 import ProductPage from './Pages/ProductPage';
+import Cart from './Pages/Cart';
 import  {BrowserRouter as Router , Routes , Route}  from "react-router-dom";
+import ProductDetails from './Pages/ProductDetails';
 function App() {
   
 
@@ -20,6 +22,8 @@ function App() {
           <Route path='/marksheet'  element={<Marksheet/>}/>
           <Route path='/exampleofloop'  element={<ExampleOfLoop/>}/>
           <Route path='/product'  element={<ProductPage/>}/>
+          <Route path='/cart'  element={<Cart/>}/>
+          <Route path='/productdetails'  element={<ProductDetails/>}/>
 
         </Routes>
       </Router>

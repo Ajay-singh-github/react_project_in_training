@@ -1,0 +1,33 @@
+.cart-parent-box{
+    /* border:2px solid black; */
+    height:550px;
+    width:97%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cart-img-box img{
+    height:257px;
+    width: 300px;
+}
+.cart-content1{
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+.cart-content2{
+    margin-top: 10px;
+    color: gray;
+    margin-left: 50px;
+}
+.cart-button{
+height: 41px;
+width:244px;
+background-color: rgb(255, 82, 0);
+color:white;
+border: none;
+font-size: 20px;
+margin-top: 20px;
+margin-left: 50px;
+}
