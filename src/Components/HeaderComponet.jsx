@@ -130,7 +130,7 @@ export default function HeaderComponent(props) {
           </div>
         </li>
 
-        <li>
+        <li style={{cursor:"pointer"}}>
           <div className='icon'>
             <div><CiShoppingCart /></div>&nbsp;
             <div onClick={()=>navigate("/cart")}>Cart</div>

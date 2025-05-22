@@ -3,8 +3,11 @@ import { useState } from "react"
 import { useLocation } from "react-router-dom";
 import HeaderComponent from "../Components/HeaderComponet";
 import "../css/product.css";
+import { useDispatch } from "react-redux";
+import AddIcon from '@mui/icons-material/Add';
 export default function ProductPage() {
     const location = useLocation()
+    const dispatch = useDispatch()
     const categoryId = location.state.categoryId    //2
     // console.log("what is in location:",location)
     // console.log("Category Id:",categoryId)
@@ -40,6 +43,11 @@ export default function ProductPage() {
     const d = filter.filter((item)=>item.productname.toLowerCase().includes(element.target.value.toLowerCase()))    // india     in    indigo
     setSearchItem(d)
     }
+
+    const AddToCart =(item)=>{
+      console.log("ADD TO CART ITEM:",item)
+      dispatch({"type":"ADD_PRODUCT",payload:[item.productId,{...item,"quantity":1}]}) // spread operator
+    }
     
     return (<div>
         <HeaderComponent/>
@@ -70,7 +78,7 @@ export default function ProductPage() {
                     <p className="product-description">{item.description}</p>
                     <div className="main-div-of-add-to-cart">
                         {item.offerprice ? <div className="product-price">&#8377;<s>{item.price}</s> {item.offerprice}</div> : <div className="product-price">&#8377;{item.price}</div>}
-                        <div className="add-to-cart">Add To Cart</div>
+                        <div className="add-to-cart" onClick={()=>AddToCart(item)}>Add To Cart</div>
                     </div>
                 </div>
             ))

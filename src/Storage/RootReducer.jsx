@@ -1,24 +1,24 @@
-const initialState = { employeeData: {} }
+const initialState = { productData: {} }
 
 export default function RootReducer(state = initialState , action)
 {
     switch(action.type)
     {
-        case "ADD_EMPLOYEE":
-                state.employeeData[action.payload[0]] = action.payload[1]
-                console.log(state.employeeData)
-                return {employeeData:state.employeeData}
+        case "ADD_PRODUCT":
+                state.productData[action.payload[0]] = action.payload[1]
+                console.log(state.productData)
+                return {productData:state.productData}
     
-        case "DEL_EMPLOYEE":
-             delete state.employeeData[action.payload[0]]
-             return {employeeData:state.employeeData}
+        case "DEL_PRODUCT":
+             delete state.productData[action.payload[0]]
+             return {productData:state.productData}
                 // delete state.employeeData.action.payload[0]
              break
 
-        case "EDIT_EMPLOYEE":
-             state.employeeData[action.payload[0]] = action.payload[1]
-             return {employeeData:state.employeeData}
+        case "EDIT_PRODUCT":
+             state.productData[action.payload[0]] = action.payload[1]
+             return {productData:state.productData}
         default:
-            return {employeeData:state.employeeData}
+            return {productData:state.productData}
     }
 }

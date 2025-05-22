@@ -7,7 +7,7 @@ import ExampleOfLoop from './Components/ExampleOfLoopComponent';
 import ProductPage from './Pages/ProductPage';
 import Cart from './Pages/Cart';
 import  {BrowserRouter as Router , Routes , Route}  from "react-router-dom";
-import ProductDetails from './Pages/ProductDetails';
+import ProductDetails from "../src/Pages/ProductDetails";
 function App() {
   
 
