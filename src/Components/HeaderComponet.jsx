@@ -13,23 +13,21 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
-
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from "react-redux";
 export default function HeaderComponent(props) {
   var navigate = useNavigate()
+  const cartData = useSelector((state) => state?.productData);
+  console.log("CARTDATA IN HEADER COMPONENT:",cartData)
+  const valueofcartdata = Object.values(cartData || {});
   var defaultSearch = props ? props.defaultSearch : false
   const [open, setOpen] = useState(false);
 
@@ -37,42 +35,39 @@ export default function HeaderComponent(props) {
     setOpen(newOpen);
   };
 
-  const handleClick=(text)=>{
-    if(text=="Home")
-    {
+  const handleClick = (text) => {
+    if (text == "Home") {
       navigate("/")
     }
-    if(text=="Cart")
-    {
+    if (text == "Cart") {
       navigate("/cart")
     }
   }
 
 
-  const getIcon=(text)=>{
-   switch(text)
-   {
+  const getIcon = (text) => {
+    switch (text) {
       case 'Home':
-        return <HomeFilledIcon/>
+        return <HomeFilledIcon />
       case "Offers":
-        return <LocalOfferIcon/>
+        return <LocalOfferIcon />
       case 'Profile':
-        return <AccountBoxIcon/>
+        return <AccountBoxIcon />
       case 'Cart':
-        return <AddShoppingCartIcon/>  
+        return <AddShoppingCartIcon />
       case 'Logout':
-        return <LogoutIcon/>
-   }
+        return <LogoutIcon />
+    }
   }
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {['Home', 'Offers', 'Profile', 'Cart','Logout'].map((text, index) => (
+        {['Home', 'Offers', 'Profile', 'Cart', 'Logout'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton onClick={()=>handleClick(text)}>
+            <ListItemButton onClick={() => handleClick(text)}>
               <ListItemIcon>
-               {getIcon(text)}
+                {getIcon(text)}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -82,8 +77,10 @@ export default function HeaderComponent(props) {
     </Box>
   );
 
+  const totalItem = valueofcartdata.reduce((item1,item2)=>{ return item1+item2.quantity},0)
+
   return <div className='nav'>
-    <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png" onClick={()=>navigate("/")} style={{cursor:"pointer"}}></img></div>
+    <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png" onClick={() => navigate("/")} style={{ cursor: "pointer" }}></img></div>
     <div className="threeline" onClick={toggleDrawer(true)}><MenuIcon /></div>
 
     <div className='list'>
@@ -130,10 +127,27 @@ export default function HeaderComponent(props) {
           </div>
         </li>
 
-        <li style={{cursor:"pointer"}}>
-          <div className='icon'>
-            <div><CiShoppingCart /></div>&nbsp;
-            <div onClick={()=>navigate("/cart")}>Cart</div>
+        <li style={{ cursor: "pointer", position: "relative" }}>
+          <div
+            className="icon"
+            onClick={() => navigate("/cart")}
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <span
+              style={{
+                position: "absolute",
+                top: "-5px",
+                left: "18px",
+                backgroundColor: "red",
+                color: "white",
+                borderRadius: "50%",
+                padding: "2px 6px",
+                fontSize: "12px"
+              }}
+            >
+              {totalItem}
+            </span>
+            <CiShoppingCart style={{ fontSize: "25px" }} />
           </div>
         </li>
 
@@ -143,8 +157,8 @@ export default function HeaderComponent(props) {
     </div>
 
     <Drawer open={open} onClose={toggleDrawer(false)}>
-     {DrawerList}
-      
+      {DrawerList}
+
     </Drawer>
   </div>;
 }
