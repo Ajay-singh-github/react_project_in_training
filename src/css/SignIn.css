@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* background: linear-gradient(120deg, #2980b9, #6dd5fa); */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 40px 0;
+}
+
+.signincontainer {
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.signform-container {
+    width: 100%;
+}
+
+.signform-btn {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.signform-btn span {
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.signform-btn span:hover {
+    color: #3498db;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn {
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+a {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #3498db;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+@media (max-width: 480px) {
+    .signincontainer {
+        padding: 30px 20px;
+    }
+
+    .signform-btn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signform-btn span {
+        margin-bottom: 10px;
+    }
+
+    /* #indicator {
+        display: none;
+    } */
+}

@@ -8,6 +8,7 @@ import ProductPage from './Pages/ProductPage';
 import Cart from './Pages/Cart';
 import  {BrowserRouter as Router , Routes , Route}  from "react-router-dom";
 import ProductDetails from "../src/Pages/ProductDetails";
+import SignIn from './Pages/SignIn';
 function App() {
   
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/product'  element={<ProductPage/>}/>
           <Route path='/cart'  element={<Cart/>}/>
           <Route path='/productdetails'  element={<ProductDetails/>}/>
+          <Route path='/signin'  element={<SignIn/>}/>
 
         </Routes>
       </Router>

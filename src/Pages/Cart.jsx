@@ -3,6 +3,18 @@ import Navbar from "../Components/HeaderComponet";
 import { useDispatch, useSelector } from "react-redux";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+
+import * as React from 'react';
+
+import {
+  Box,
+  Button,
+  Drawer,
+  TextField,
+  Typography,
+  Grid,
+  MenuItem
+} from '@mui/material';
 export default function CartPage() {
   var dispatch = useDispatch()
   const cartData = useSelector((state) => state?.productData);
@@ -23,9 +35,73 @@ export default function CartPage() {
     }
   }
 
-  const totalItem = valueofcartdata.reduce((item1,item2)=>{ return item1+item2.quantity},0)
-  const totalPrice = valueofcartdata.reduce((item1,item2)=>{return item1+(item2.quantity*item2.price)},0)
-  
+  const totalItem = valueofcartdata.reduce((item1, item2) => { return item1 + item2.quantity }, 0)
+  const totalPrice = valueofcartdata.reduce((item1, item2) => { return item1 + (item2.quantity * item2.price) }, 0)
+
+  const [state, setState] = React.useState({
+    top: false,
+  });
+  const [countries ,setCountries] = React.useState(["India","USA"])
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  const AddressForm = () => (
+    <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
+      <Typography variant="h5" gutterBottom>
+        Shipping Address
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="First Name" variant="outlined" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Last Name" variant="outlined" />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField fullWidth label="Address Line 1" variant="outlined" />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField fullWidth label="Address Line 2" variant="outlined" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="City" variant="outlined" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="State/Province/Region" variant="outlined" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Zip / Postal Code" variant="outlined" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            select
+            label="Country"
+            variant="outlined"
+            defaultValue=""
+          >
+            {countries.map((country) => (
+              <MenuItem key={country} value={country} fullWidth>
+                {country}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" fullWidth onClick={() => setState({ top: false })}>
+            Save Address
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+
   return (
     <>
       <Navbar />
@@ -117,11 +193,30 @@ export default function CartPage() {
               border: "none",
               borderRadius: "5px",
               cursor: "pointer"
-            }}>
+            }}
+            onClick={toggleDrawer("top", true)}
+            >
               Proceed to Checkout
             </button>
           </div>
         )}
+      </div>
+
+
+      {/* drawer */}
+      <div>
+        {['top'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              PaperProps={{sx:{height:"100vh"}}}
+            >
+              {AddressForm()}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
     </>
 

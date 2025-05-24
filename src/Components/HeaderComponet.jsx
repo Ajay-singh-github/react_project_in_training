@@ -26,10 +26,11 @@ import { useSelector } from "react-redux";
 export default function HeaderComponent(props) {
   var navigate = useNavigate()
   const cartData = useSelector((state) => state?.productData);
-  console.log("CARTDATA IN HEADER COMPONENT:",cartData)
+  console.log("CARTDATA IN HEADER COMPONENT:", cartData)
   const valueofcartdata = Object.values(cartData || {});
   var defaultSearch = props ? props.defaultSearch : false
   const [open, setOpen] = useState(false);
+  const profile = false
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -77,7 +78,7 @@ export default function HeaderComponent(props) {
     </Box>
   );
 
-  const totalItem = valueofcartdata.reduce((item1,item2)=>{ return item1+item2.quantity},0)
+  const totalItem = valueofcartdata.reduce((item1, item2) => { return item1 + item2.quantity }, 0)
 
   return <div className='nav'>
     <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png" onClick={() => navigate("/")} style={{ cursor: "pointer" }}></img></div>
@@ -120,12 +121,22 @@ export default function HeaderComponent(props) {
           </div>
         </li>
 
-        <li>
-          <div className='icon'>
-            <div><CiUser /></div>&nbsp;
-            <div><a href="#">Profile</a></div>
-          </div>
-        </li>
+        {profile ?
+          <li>
+            <div className='icon'>
+              <div><CiUser /></div>&nbsp;
+              <div><a href="#">Profile</a></div>
+            </div>
+          </li>
+          :
+           <li>
+            <div className='icon'>
+              <div><CiUser /></div>&nbsp;
+              <div onClick={()=>navigate("/signin")} style={{fontWeight:"bold",cursor:"pointer"}}>Login</div>
+            </div>
+          </li>
+          }
+
 
         <li style={{ cursor: "pointer", position: "relative" }}>
           <div
@@ -133,20 +144,22 @@ export default function HeaderComponent(props) {
             onClick={() => navigate("/cart")}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <span
-              style={{
-                position: "absolute",
-                top: "-5px",
-                left: "18px",
-                backgroundColor: "red",
-                color: "white",
-                borderRadius: "50%",
-                padding: "2px 6px",
-                fontSize: "12px"
-              }}
-            >
-              {totalItem}
-            </span>
+            {totalItem == 0 ? "" :
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-5px",
+                  left: "18px",
+                  backgroundColor: "red",
+                  color: "white",
+                  borderRadius: "50%",
+                  padding: "2px 6px",
+                  fontSize: "12px"
+                }}
+              >
+                {totalItem}
+              </span>
+            }
             <CiShoppingCart style={{ fontSize: "25px" }} />
           </div>
         </li>
