@@ -6,11 +6,12 @@ import Marksheet from './Components/Marksheet';
 import ExampleOfLoop from './Components/ExampleOfLoopComponent';
 import ProductPage from './Pages/ProductPage';
 import Cart from './Pages/Cart';
-import  {BrowserRouter as Router , Routes , Route}  from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductDetails from "../src/Pages/ProductDetails";
 import SignIn from './Pages/SignIn';
+import toast, { Toaster } from 'react-hot-toast';
 function App() {
-  
+
 
   return (
 
@@ -18,18 +19,18 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/'  element={<HomePage/>}/>
-          <Route path='/service'  element={<ServicePage/>}/>
-          <Route path='/marksheet'  element={<Marksheet/>}/>
-          <Route path='/exampleofloop'  element={<ExampleOfLoop/>}/>
-          <Route path='/product'  element={<ProductPage/>}/>
-          <Route path='/cart'  element={<Cart/>}/>
-          <Route path='/productdetails'  element={<ProductDetails/>}/>
-          <Route path='/signin'  element={<SignIn/>}/>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/service' element={<ServicePage />} />
+          <Route path='/marksheet' element={<Marksheet />} />
+          <Route path='/exampleofloop' element={<ExampleOfLoop />} />
+          <Route path='/product' element={<ProductPage />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/productdetails' element={<ProductDetails />} />
+          <Route path='/signin' element={<SignIn />} />
 
         </Routes>
       </Router>
-
+      <Toaster />
 
     </div>
 
