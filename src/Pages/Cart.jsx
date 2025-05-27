@@ -15,11 +15,22 @@ import {
   Grid,
   MenuItem
 } from '@mui/material';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function CartPage() {
+  var navigate = useNavigate()
   var dispatch = useDispatch()
   const cartData = useSelector((state) => state?.productData);
   const valueofcartdata = Object.values(cartData || {});
   console.log("CART ITEMS :", valueofcartdata)
+  const [firstname, setFirstName] = useState()
+  const [lastname, setLastName] = useState()
+  const [addressline1, setAddressLine1] = useState()
+  const [addressline2, setAddressLine2] = useState()
+  const [city, setCity] = useState()
+  const [stater, setStateR] = useState()
+  const [postalcode, setPostalCode] = useState()
+  const [country, setCountry] = useState()
 
   const handleIncrease = (item) => {
     console.log("ITEM INCREASE:", item)
@@ -41,7 +52,7 @@ export default function CartPage() {
   const [state, setState] = React.useState({
     top: false,
   });
-  const [countries ,setCountries] = React.useState(["India","USA"])
+  const [countries, setCountries] = React.useState(["India", "USA"])
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -49,6 +60,21 @@ export default function CartPage() {
     }
     setState({ ...state, [anchor]: open });
   };
+
+  const handleAddress = () => {
+    const body = { "firstname": firstname, "lastname": lastname, "addressline1": addressline1, "addressline2": addressline2, "city": city, "stater": stater, "postalcode": postalcode, "country": country }
+    const isLogin = JSON.parse(localStorage.getItem("login"))?.status || false
+
+    if (isLogin) {
+      localStorage.setItem("address", JSON.stringify(body))
+      setState({ top: false })
+    }else{
+      navigate('/signin')
+    }
+
+  }
+
+
 
   const AddressForm = () => (
     <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
@@ -58,25 +84,25 @@ export default function CartPage() {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <TextField fullWidth label="First Name" variant="outlined" />
+          <TextField fullWidth label="First Name" variant="outlined" onChange={(e) => setFirstName(e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField fullWidth label="Last Name" variant="outlined" />
+          <TextField fullWidth label="Last Name" variant="outlined" onChange={(e) => setLastName(e.target.value)} />
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Address Line 1" variant="outlined" />
+          <TextField fullWidth label="Address Line 1" variant="outlined" onChange={(e) => setAddressLine1(e.target.value)} />
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Address Line 2" variant="outlined" />
+          <TextField fullWidth label="Address Line 2" variant="outlined" onChange={(e) => setAddressLine2(e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField fullWidth label="City" variant="outlined" />
+          <TextField fullWidth label="City" variant="outlined" onChange={(e) => setCity(e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField fullWidth label="State/Province/Region" variant="outlined" />
+          <TextField fullWidth label="State/Province/Region" variant="outlined" onChange={(e) => setStateR(e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField fullWidth label="Zip / Postal Code" variant="outlined" />
+          <TextField fullWidth label="Zip / Postal Code" variant="outlined" onChange={(e) => setPostalCode(e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -85,6 +111,7 @@ export default function CartPage() {
             label="Country"
             variant="outlined"
             defaultValue=""
+            onChange={(e) => setCountry(e.target.value)}
           >
             {countries.map((country) => (
               <MenuItem key={country} value={country} fullWidth>
@@ -94,7 +121,7 @@ export default function CartPage() {
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth onClick={() => setState({ top: false })}>
+          <Button variant="contained" color="primary" fullWidth onClick={() => handleAddress()}>
             Save Address
           </Button>
         </Grid>
@@ -194,7 +221,7 @@ export default function CartPage() {
               borderRadius: "5px",
               cursor: "pointer"
             }}
-            onClick={toggleDrawer("top", true)}
+              onClick={toggleDrawer("top", true)}
             >
               Proceed to Checkout
             </button>
@@ -211,7 +238,7 @@ export default function CartPage() {
               anchor={anchor}
               open={state[anchor]}
               onClose={toggleDrawer(anchor, false)}
-              PaperProps={{sx:{height:"100vh"}}}
+              PaperProps={{ sx: { height: "100vh" } }}
             >
               {AddressForm()}
             </Drawer>
