@@ -20,7 +20,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 export default function HeaderComponent(props) {
@@ -30,7 +30,17 @@ export default function HeaderComponent(props) {
   const valueofcartdata = Object.values(cartData || {});
   var defaultSearch = props ? props.defaultSearch : false
   const [open, setOpen] = useState(false);
-  const profile = false
+  const [profile, setProfile] = useState(false)
+  
+ 
+
+  useEffect(()=>{
+  const islogin = JSON.parse(localStorage.getItem("login"))
+  if(islogin?.loginstatus)
+  {
+    setProfile(islogin?.loginstatus)
+  }
+  },[])   
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
