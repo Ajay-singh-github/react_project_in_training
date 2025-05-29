@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 export default function ProductPage() {
     const location = useLocation()
     const dispatch = useDispatch()
-    const categoryId = location.state.categoryId    //2
+    const categoryId = location?.state?.categoryId    //2      ?   optional chaining 
     // console.log("what is in location:",location)
     // console.log("Category Id:",categoryId)
     const [searchitem,setSearchItem]=useState()    

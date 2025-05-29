@@ -20,9 +20,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 export default function HeaderComponent(props) {
   var navigate = useNavigate()
   const cartData = useSelector((state) => state?.productData);
@@ -31,16 +32,15 @@ export default function HeaderComponent(props) {
   var defaultSearch = props ? props.defaultSearch : false
   const [open, setOpen] = useState(false);
   const [profile, setProfile] = useState(false)
-  
- 
 
-  useEffect(()=>{
-  const islogin = JSON.parse(localStorage.getItem("login"))
-  if(islogin?.loginstatus)
-  {
-    setProfile(islogin?.loginstatus)
-  }
-  },[])   
+
+
+  useEffect(() => {
+    const islogin = JSON.parse(localStorage.getItem("login"))
+    if (islogin?.loginstatus) {
+      setProfile(islogin?.loginstatus)
+    }
+  }, [])
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -90,6 +90,48 @@ export default function HeaderComponent(props) {
 
   const totalItem = valueofcartdata.reduce((item1, item2) => { return item1 + item2.quantity }, 0)
 
+
+  const handleLogout = () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Logout!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        localStorage.setItem("login", JSON.stringify({ "loginstatus": false }))
+        window.location.reload()
+        swalWithBootstrapButtons.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "Your imaginary file is safe :)",
+          icon: "error"
+        });
+      }
+    });
+  }
+
+
   return <div className='nav'>
     <div className='logo-img'><img src="https://media.ipoji.com/ipo/images/swiggy-logo.png" onClick={() => navigate("/")} style={{ cursor: "pointer" }}></img></div>
     <div className="threeline" onClick={toggleDrawer(true)}><MenuIcon /></div>
@@ -132,20 +174,20 @@ export default function HeaderComponent(props) {
         </li>
 
         {profile ?
-          <li>
+          <li onClick={() => handleLogout()}>
             <div className='icon'>
               <div><CiUser /></div>&nbsp;
               <div><a href="#">Profile</a></div>
             </div>
           </li>
           :
-           <li>
+          <li>
             <div className='icon'>
               <div><CiUser /></div>&nbsp;
-              <div onClick={()=>navigate("/signin")} style={{fontWeight:"bold",cursor:"pointer"}}>Login</div>
+              <div onClick={() => navigate("/signin")} style={{ fontWeight: "bold", cursor: "pointer" }}>Login</div>
             </div>
           </li>
-          }
+        }
 
 
         <li style={{ cursor: "pointer", position: "relative" }}>
@@ -185,3 +227,5 @@ export default function HeaderComponent(props) {
     </Drawer>
   </div>;
 }
+
+
