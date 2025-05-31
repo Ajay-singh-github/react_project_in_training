@@ -31,6 +31,7 @@ export default function CartPage() {
   const [stater, setStateR] = useState()
   const [postalcode, setPostalCode] = useState()
   const [country, setCountry] = useState()
+  const [shippingaddress, setShippingAddress] = useState()
 
   const handleIncrease = (item) => {
     console.log("ITEM INCREASE:", item)
@@ -63,18 +64,24 @@ export default function CartPage() {
 
   const handleAddress = () => {
     const body = { "firstname": firstname, "lastname": lastname, "addressline1": addressline1, "addressline2": addressline2, "city": city, "stater": stater, "postalcode": postalcode, "country": country }
-    const isLogin = JSON.parse(localStorage.getItem("login"))?.status || false
+    const isLogin = JSON.parse(localStorage.getItem("login"))?.loginstatus || false
 
     if (isLogin) {
       localStorage.setItem("address", JSON.stringify(body))
       setState({ top: false })
-    }else{
+      fetchAddressFromLocalStorage()
+    } else {
       navigate('/signin')
     }
 
   }
 
 
+  const fetchAddressFromLocalStorage = () => {
+    const add = JSON.parse(localStorage.getItem("address"))
+    setShippingAddress(add)
+    console.log("YES FETCHED ADDRESS", add)
+  }
 
   const AddressForm = () => (
     <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
@@ -128,6 +135,8 @@ export default function CartPage() {
       </Grid>
     </Box>
   );
+
+
 
   return (
     <>
@@ -211,23 +220,54 @@ export default function CartPage() {
               <span>Total Price:</span>
               <span>₹{totalPrice}</span>
             </div>
+            {shippingaddress?.firstname?.length > 0 ? 
             <button style={{
-              width: "100%",
-              padding: "10px",
-              backgroundColor: "green",
-              color: "white",
-              fontWeight: "bold",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer"
-            }}
-              onClick={toggleDrawer("top", true)}
-            >
-              Proceed to Checkout
-            </button>
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "green",
+                color: "white",
+                fontWeight: "bold",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer"
+              }}
+                onClick={toggleDrawer("top", true)}
+              >
+                Proceed to Payment
+              </button>
+            :
+              <button style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "green",
+                color: "white",
+                fontWeight: "bold",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer"
+              }}
+                onClick={toggleDrawer("top", true)}
+              >
+                Proceed to Address
+              </button>
+            }
           </div>
+
+
+
         )}
       </div>
+      {shippingaddress?.firstname?.length > 0 ?
+        <div style={{ width: '448px', height: "180px", background: '#ffffff', borderRadius: "5px", boxShadow: "0px 0px 1px 0px", position: 'absolute', left: 10 }}>
+          <h2 style={{ paddingLeft: "5px", paddingTop: "5px" }}>Shipping address</h2>
+          <div><span>{shippingaddress?.firstname} {shippingaddress?.lastname} {shippingaddress?.addressline1} {shippingaddress?.addressline2} {shippingaddress?.city
+          }</span> {shippingaddress?.stater} {shippingaddress?.postalcode
+            }</div>
+          <p></p>
+        </div> :
+        ""
+      }
+
 
 
       {/* drawer */}
