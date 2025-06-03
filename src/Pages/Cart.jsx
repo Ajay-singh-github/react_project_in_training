@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 export default function CartPage() {
   var navigate = useNavigate()
   var dispatch = useDispatch()
@@ -32,6 +33,7 @@ export default function CartPage() {
   const [postalcode, setPostalCode] = useState()
   const [country, setCountry] = useState()
   const [shippingaddress, setShippingAddress] = useState()
+ 
 
   const handleIncrease = (item) => {
     console.log("ITEM INCREASE:", item)
@@ -136,6 +138,60 @@ export default function CartPage() {
     </Box>
   );
 
+    const loadRazorpayScript = () => {
+    return new Promise((resolve) => { 
+      if (document.getElementById("razorpay-script")) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.id = "razorpay-script";
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  ////////////////////Payment API/////////////////////
+  
+  const handlePayment = useCallback(async () => {
+    const res = await loadRazorpayScript();
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_GQ6XaPC6gMPNwH", // Replace with your Razorpay key
+      amount: totalPrice * 100, // in paise
+      currency: "INR",
+      name: "Food Shop",
+      description: "Online Payments",
+      handler: function (response) {
+        alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+        // You can add further payment success logic here
+      },
+      prefill: {
+        name: `${shippingaddress?.firstname} ${shippingaddress?.lastname}` || "",
+        email: "youremail@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: `${shippingaddress?.addressline1} ${shippingaddress?.addressline2} ${shippingaddress?.city} ${shippingaddress?.stater} ${shippingaddress?.postalcode}`,
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }, [shippingaddress, totalPrice]);
+
+////////////////////////////////////////////////////////
+
 
 
   return (
@@ -231,7 +287,7 @@ export default function CartPage() {
                 borderRadius: "5px",
                 cursor: "pointer"
               }}
-                onClick={toggleDrawer("top", true)}
+                onClick={handlePayment}
               >
                 Proceed to Payment
               </button>
@@ -289,3 +345,75 @@ export default function CartPage() {
 
   );
 }
+
+
+
+
+
+
+
+
+
+// step -1
+
+// import { useCallback } from "react";
+
+
+//     const loadRazorpayScript = () => {
+//     return new Promise((resolve) => { 
+//       if (document.getElementById("razorpay-script")) {
+//         resolve(true);
+//         return;
+//       }
+//       const script = document.createElement("script");
+//       script.id = "razorpay-script";
+//       script.src = "https://checkout.razorpay.com/v1/checkout.js";
+//       script.onload = () => resolve(true);
+//       script.onerror = () => resolve(false);
+//       document.body.appendChild(script);
+//     });
+//   };
+  
+  
+  
+//     ////////////////////Payment API/////////////////////
+    
+//     const handlePayment = useCallback(async () => {
+//       const res = await loadRazorpayScript();
+  
+//       if (!res) {
+//         alert("Razorpay SDK failed to load. Are you online?");
+//         return;
+//       }
+  
+//       const options = {
+//         key: "rzp_test_GQ6XaPC6gMPNwH", // Replace with your Razorpay key
+//         amount: totalPrice * 100, // in paise
+//         currency: "INR",
+//         name: "Food Shop",
+//         description: "Online Payments",
+//         handler: function (response) {
+//           alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+//           // You can add further payment success logic here
+//         },
+//         prefill: {
+//           name: `${shippingaddress?.firstname} ${shippingaddress?.lastname}` || "",
+//           email: "youremail@example.com",
+//           contact: "9999999999",
+//         },
+//         notes: {
+//           address: `${shippingaddress?.addressline1} ${shippingaddress?.addressline2} ${shippingaddress?.city} ${shippingaddress?.stater} ${shippingaddress?.postalcode}`,
+//         },
+//         theme: {
+//           color: "#3399cc",
+//         },
+//       };
+  
+//       const paymentObject = new window.Razorpay(options);
+//       paymentObject.open();
+//     }, [shippingaddress, totalPrice]);
+  
+// ////////////////////////////////////////////////////////
+
+
+//   step -4  onClick={handlePayment}
