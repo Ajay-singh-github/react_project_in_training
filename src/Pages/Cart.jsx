@@ -170,7 +170,10 @@ export default function CartPage() {
       name: "Food Shop",
       description: "Online Payments",
       handler: function (response) {
-        alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+        localStorage.removeItem("productData")
+        alert("Your Order has been ordered Successfully & Payment")
+        window.location.reload()
+        // alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
         // You can add further payment success logic here
       },
       prefill: {
